@@ -4,57 +4,71 @@ function computerPlay() {
     const option = getRandomInt(3);
 
     if (option === 0){
-        return 'Rock'
+        return 'rock'
     } 
     if (option === 1){
-        return 'Paper'
+        return 'paper'
     }
     if (option === 2){
-        return 'Scissors'
+        return 'scissors'
     }
 }
 
 function playRound(playerSelection, computerSelection){
-    const player = playerSelection.toLowerCase();
-    const computer = computerSelection.toLowerCase();
-
+    const player = playerSelection;
+    const computer = computerSelection; 
     console.log(`Player played: ${player}`);
     console.log(`Computer played: ${computer}`);
 
     if (player == 'rock'){
         if (computer == 'rock'){
-            return "It's a tie! You both had Rock"
+            return 0
         }
         if (computer == 'scissors'){
-            return 'You win! Rock beats Scissors'
+            return 1
         }
         if (computer == 'paper'){
-            return 'You lose! Paper beats Rock'
+            return -1
         }
     }
     if (player == 'scissors'){
         if (computer == 'rock'){
-            return "You lose! Rock beats Scissors"
+            return -1
         }
         if (computer == 'scissors'){
-            return "It's a tie! You both had Scissors"
+            return 0
         }
         if (computer == 'paper'){
-            return 'You win! Scissors beats Paper'
+            return 1
         }
     }
     if (player == 'paper'){
         if (computer == 'rock'){
-            return "You win! Paper beats Rock"
+            return 1
         }
         if (computer == 'scissors'){
-            return "You lose! Scissors beats Paper"
+            return -1
         }
         if (computer == 'paper'){
-            return "It's a tie! You both had Paper"
+            return 0
         }
     }
 }
 
-console.log(playRound('rock', computerPlay()));
 
+function game(){
+    for (let i =0; i < 5; i++){
+        let playerSelection = '';
+        while (true){
+             playerSelection = prompt("Pick either rock, paper, or scissors").toLowerCase();
+             if (playerSelection == 'rock' || playerSelection == 'paper' || playerSelection == 'scissors'){
+                 break;
+             }
+        }
+        const computerSelection = computerPlay();
+        console.log(playRound(playerSelection, computerSelection));
+    
+    }
+}
+
+game();
