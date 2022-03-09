@@ -55,8 +55,17 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
+function reportScore(wins, losses, totalGames){
+    (wins > losses) ? console.log('You win!') : console.log('You lose.')
+        console.log('Wins: ' + wins)
+        console.log('Losses: ' + losses );
+        console.log('Ties: ' + (totalGames - wins - losses))
+}
+
 
 function game(){
+    let wins = 0;
+    let losses = 0;
     for (let i =0; i < 5; i++){
         let playerSelection = '';
         while (true){
@@ -66,9 +75,16 @@ function game(){
              }
         }
         const computerSelection = computerPlay();
-        console.log(playRound(playerSelection, computerSelection));
+        if (playRound(playerSelection, computerSelection) < 0 ) {
+            losses ++;
+        }
+        else {
+            wins ++; 
+        }
+    }
+    reportScore(wins, losses, 5);
     
     }
-}
+
 
 game();
