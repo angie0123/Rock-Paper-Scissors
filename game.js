@@ -65,10 +65,13 @@ function reportScore(wins, losses, totalGames) {
 function game() {
   const body = document.querySelector("body");
   const rockBtn = document.createElement("div");
+  rockBtn.textContent = "Rock";
   rockBtn.classList.add("rock", "button");
   const scissorBtn = document.createElement("div");
+  scissorBtn.textContent = "Scissors";
   scissorBtn.classList.add("scissors", "button");
   const paperBtn = document.createElement("div");
+  paperBtn.textContent = "Paper";
   paperBtn.classList.add("paper", "button");
 
   body.appendChild(rockBtn);
