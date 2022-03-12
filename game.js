@@ -79,12 +79,32 @@ function askToPlayAgain() {
   const playAgainButton = document.createElement("div");
   playAgainButton.classList.add("play-button");
   playAgainButton.textContent = "Play Again";
+  playAgainButton.addEventListener("click", replay);
 
   body.appendChild(playAgainButton);
 }
 
 function updateScore(result) {
   score[result] += 1;
+}
+
+function replay() {
+  resetScore();
+  resetGameUI();
+}
+
+function resetScore() {
+  score.lose = 0;
+  score.win = 0;
+  score.tie = 0;
+}
+
+function resetGameUI() {
+  const body = document.querySelector("body");
+  while (body.firstChild) {
+    body.removeChild(body.firstChild);
+  }
+  game();
 }
 
 function displayScore() {
@@ -98,8 +118,7 @@ function displayScore() {
   scoreTies.textContent = score.tie === 0 ? "" : `Tie: ${score.tie}`;
 }
 
-function game() {
-  //set up game interface buttons
+function initButtons() {
   const body = document.querySelector("body");
   const btnContainer = document.createElement("div");
   btnContainer.classList.add("buttons");
@@ -120,8 +139,10 @@ function game() {
   });
 
   body.appendChild(btnContainer);
+}
 
-  //set up scoreDisplay
+function initScoreDisplay() {
+  const body = document.querySelector("body");
   const scoreBoard = document.createElement("div");
   scoreBoard.classList.add("scoreboard");
   const scoreWins = document.createElement("div");
@@ -134,31 +155,11 @@ function game() {
   scoreBoard.appendChild(scoreLosses);
   scoreBoard.appendChild(scoreTies);
   body.appendChild(scoreBoard);
+}
 
-  //   let wins = 0;
-  //   let losses = 0;
-  //   for (let i = 0; i < 5; i++) {
-  //     let playerSelection = "";
-  //     while (true) {
-  //       playerSelection = prompt(
-  //         "Pick either rock, paper, or scissors"
-  //       ).toLowerCase();
-  //       if (
-  //         playerSelection == "rock" ||
-  //         playerSelection == "paper" ||
-  //         playerSelection == "scissors"
-  //       ) {
-  //         break;
-  //       }
-  //     }
-  //     const computerSelection = computerPlay();
-  //     if (playRound(playerSelection, computerSelection) < 0) {
-  //       losses++;
-  //     } else {
-  //       wins++;
-  //     }
-  //   }
-  //   reportScore(wins, losses, 5);
+function game() {
+  initButtons();
+  initScoreDisplay();
 }
 
 game();
