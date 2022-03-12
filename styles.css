@@ -51,10 +51,14 @@ body {
 
 .score {
   width: 200px;
-  margin: 50px 20px;
+  margin: 10px 20px;
   padding: 10px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 26px;
+  color: goldenrod;
+  text-align: center;
 }
 
 .result {
@@ -81,4 +85,18 @@ body {
 .play-button:hover {
   cursor: pointer;
   transform: scale(1.05);
+}
+
+.round-results {
+  text-align: center;
+  line-height: 1.5rem;
+  padding: 20px;
+}
+
+.win-color {
+  color: green;
+}
+
+.lose-color {
+  color: red;
 }

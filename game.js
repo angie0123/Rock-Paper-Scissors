@@ -61,7 +61,10 @@ function displayRoundResult(playersPick, computersPick) {
   const roundWinner = document.querySelector("div.round-winner");
   playerPick.textContent = `You picked: ${playersPick}`;
   computerPick.textContent = `Computer picked: ${computersPick}`;
-  roundWinner.textContent = `Round: ${result(playersPick, computersPick)}`;
+  const roundResult = result(playersPick, computersPick);
+  roundWinner.classList = "round-winner";
+  roundWinner.classList.add(`${roundResult}-color`);
+  roundWinner.textContent = `Round: ${roundResult}`;
 }
 
 function endGame() {
