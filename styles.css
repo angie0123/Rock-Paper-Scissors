@@ -6,9 +6,16 @@
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.buttons {
+  width: 65%;
+  display: flex;
+  justify-content: center;
 }
 
 .button {
@@ -22,4 +29,33 @@ body {
   align-items: center;
   color: white;
   font-size: 30px;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+}
+
+.score {
+  width: 200px;
+  margin: 50px 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+.result {
+  padding: 20px;
+}
+
+.play-button {
+  width: 120px;
+  border-radius: 9px;
+  background: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  padding: 5px 2px;
 }

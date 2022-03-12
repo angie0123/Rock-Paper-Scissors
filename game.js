@@ -45,19 +45,52 @@ function result(user, opponent) {
 function playRound(event, computerSelection = computerPlay()) {
   const player = this.textContent.toLowerCase();
   const computer = computerSelection;
-  const updatedScore = updateScore(result(player, computer));
+  updateScore(result(player, computer));
   displayScore();
+  if (isGameOver()) {
+    displayWinner();
+    endGame();
+    askToPlayAgain();
+  }
+}
+
+function endGame() {
+  const buttons = document.querySelectorAll("div.button");
+  buttons.forEach((button) => {
+    button.removeEventListener("click", playRound);
+  });
+}
+
+function isGameOver() {
+  return score.lose === 5 || score.win === 5;
+}
+
+function displayWinner() {
+  const body = document.querySelector("body");
+  const result = document.createElement("div");
+  result.classList.add("result");
+  result.textContent = score.lose === 5 ? "Uh oh! You lost!" : "Yay! You won!";
+
+  body.appendChild(result);
+}
+
+function askToPlayAgain() {
+  const body = document.querySelector("body");
+  const playAgainButton = document.createElement("div");
+  playAgainButton.classList.add("play-button");
+  playAgainButton.textContent = "Play Again";
+
+  body.appendChild(playAgainButton);
 }
 
 function updateScore(result) {
   score[result] += 1;
-  console.log(score);
 }
 
 function displayScore() {
-  const scoreWins = document.querySelector("div.score-wins");
-  const scoreLosses = document.querySelector("div.score-losses");
-  const scoreTies = document.querySelector("div.score-ties");
+  const scoreWins = document.querySelector("div.score.wins");
+  const scoreLosses = document.querySelector("div.score.losses");
+  const scoreTies = document.querySelector("div.score.ties");
 
   scoreWins.textContent = score.win === 0 ? "" : `You win: ${score.win}`;
   scoreLosses.textContent =
@@ -68,6 +101,8 @@ function displayScore() {
 function game() {
   //set up game interface buttons
   const body = document.querySelector("body");
+  const btnContainer = document.createElement("div");
+  btnContainer.classList.add("buttons");
   const rockBtn = document.createElement("div");
   rockBtn.textContent = "Rock";
   rockBtn.classList.add("rock", "button");
@@ -81,18 +116,20 @@ function game() {
   const buttons = [rockBtn, scissorBtn, paperBtn];
   buttons.forEach((button) => {
     button.addEventListener("click", playRound);
-    body.appendChild(button);
+    btnContainer.appendChild(button);
   });
+
+  body.appendChild(btnContainer);
 
   //set up scoreDisplay
   const scoreBoard = document.createElement("div");
   scoreBoard.classList.add("scoreboard");
   const scoreWins = document.createElement("div");
-  scoreWins.classList.add("score-wins");
+  scoreWins.classList.add("score", "wins");
   const scoreLosses = document.createElement("div");
-  scoreLosses.classList.add("score-losses");
+  scoreLosses.classList.add("score", "losses");
   const scoreTies = document.createElement("div");
-  scoreTies.classList.add("score-ties");
+  scoreTies.classList.add("score", "ties");
   scoreBoard.appendChild(scoreWins);
   scoreBoard.appendChild(scoreLosses);
   scoreBoard.appendChild(scoreTies);
