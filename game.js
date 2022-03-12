@@ -14,8 +14,8 @@ function computerPlay() {
   }
 }
 
-function playRound(playerSelection, computerSelection) {
-  const player = playerSelection;
+function playRound(event, computerSelection = computerPlay()) {
+  const player = this.textContent.toLowerCase();
   const computer = computerSelection;
   console.log(`Player played: ${player}`);
   console.log(`Computer played: ${computer}`);
@@ -74,9 +74,11 @@ function game() {
   paperBtn.textContent = "Paper";
   paperBtn.classList.add("paper", "button");
 
-  body.appendChild(rockBtn);
-  body.appendChild(scissorBtn);
-  body.appendChild(paperBtn);
+  const buttons = [rockBtn, scissorBtn, paperBtn];
+  buttons.forEach((button) => {
+    button.addEventListener("click", playRound);
+    body.appendChild(button);
+  });
 
   //   let wins = 0;
   //   let losses = 0;
