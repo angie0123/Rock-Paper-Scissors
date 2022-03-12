@@ -2,6 +2,13 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "Bungee", cursive;
+}
+
+h1 {
+  padding: 30px;
+  font-size: 64px;
+  color: goldenrod;
 }
 
 body {
@@ -10,6 +17,10 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: url("pixel-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .buttons {
@@ -21,7 +32,7 @@ body {
 .button {
   height: 200px;
   width: 200px;
-  background: grey;
+  background: hsl(356deg 52% 63%);
   border-radius: 9px;
   margin: 10px 20px;
   display: flex;
@@ -29,33 +40,45 @@ body {
   align-items: center;
   color: white;
   font-size: 30px;
+  transition: all 0.1s ease-in-out;
 }
 
 .scoreboard {
   display: flex;
   justify-content: center;
-  width: 60%;
+  width: 80%;
 }
 
 .score {
   width: 200px;
   margin: 50px 20px;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
+  font-size: 26px;
 }
 
 .result {
   padding: 20px;
+  font-size: 32px;
+  color: hsl(43deg 74% 52%);
 }
 
 .play-button {
   width: 120px;
   border-radius: 9px;
-  background: grey;
+  background: hsl(3deg 48% 55%);
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   font-size: 20px;
   padding: 5px 2px;
+  text-align: center;
+  transition: all 0.1s ease-in-out;
+}
+
+.button:hover,
+.play-button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }

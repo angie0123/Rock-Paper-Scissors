@@ -114,7 +114,7 @@ function displayScore() {
 
   scoreWins.textContent = score.win === 0 ? "" : `You win: ${score.win}`;
   scoreLosses.textContent =
-    score.lose === 0 ? "" : `Computer win: ${score.lose}`;
+    score.lose === 0 ? "" : `Computer wins: ${score.lose}`;
   scoreTies.textContent = score.tie === 0 ? "" : `Tie: ${score.tie}`;
 }
 
@@ -132,7 +132,7 @@ function initButtons() {
   paperBtn.textContent = "Paper";
   paperBtn.classList.add("paper", "button");
 
-  const buttons = [rockBtn, scissorBtn, paperBtn];
+  const buttons = [rockBtn, paperBtn, scissorBtn];
   buttons.forEach((button) => {
     button.addEventListener("click", playRound);
     btnContainer.appendChild(button);
@@ -157,7 +157,14 @@ function initScoreDisplay() {
   body.appendChild(scoreBoard);
 }
 
+function paintTitle() {
+  const title = document.createElement("h1");
+  const body = document.querySelector("body");
+  title.textContent = "ROCK PAPER SCISSORS";
+  body.appendChild(title);
+}
 function game() {
+  paintTitle();
   initButtons();
   initScoreDisplay();
 }
