@@ -1,3 +1,5 @@
+let score = { win: 0, lose: 0, tie: 0 };
+
 function computerPlay() {
   const getRandomInt = (max) => Math.floor(Math.random() * max);
 
@@ -17,41 +19,34 @@ function computerPlay() {
 function playRound(event, computerSelection = computerPlay()) {
   const player = this.textContent.toLowerCase();
   const computer = computerSelection;
-  console.log(`Player played: ${player}`);
-  console.log(`Computer played: ${computer}`);
+  updateScore(result(player, computer));
+}
 
-  if (player == "rock") {
-    if (computer == "rock") {
-      return 0;
-    }
-    if (computer == "scissors") {
-      return 1;
-    }
-    if (computer == "paper") {
-      return -1;
-    }
-  }
-  if (player == "scissors") {
-    if (computer == "rock") {
-      return -1;
-    }
-    if (computer == "scissors") {
-      return 0;
-    }
-    if (computer == "paper") {
-      return 1;
-    }
-  }
-  if (player == "paper") {
-    if (computer == "rock") {
-      return 1;
-    }
-    if (computer == "scissors") {
-      return -1;
-    }
-    if (computer == "paper") {
-      return 0;
-    }
+function updateScore(result) {}
+
+function result(user, opponent) {
+  switch (user) {
+    case "rock":
+      if (opponent === "scissors") {
+        return "win";
+      } else if (opponent === "paper") {
+        return "lose";
+      }
+      return "tie";
+    case "scissors":
+      if (opponent === "paper") {
+        return "win";
+      } else if (opponent === "rock") {
+        return "lose";
+      }
+      return "tie";
+    case "paper":
+      if (opponent === "rock") {
+        return "win";
+      } else if (opponent === "scissors") {
+        return "lose";
+      }
+      return "tie";
   }
 }
 
@@ -79,6 +74,8 @@ function game() {
     button.addEventListener("click", playRound);
     body.appendChild(button);
   });
+
+  console.log(score);
 
   //   let wins = 0;
   //   let losses = 0;
