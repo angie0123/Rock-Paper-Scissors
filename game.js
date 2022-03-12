@@ -45,6 +45,7 @@ function result(user, opponent) {
 function playRound(event, computerSelection = computerPlay()) {
   const player = this.textContent.toLowerCase();
   const computer = computerSelection;
+  displayRoundResult(player, computer);
   updateScore(result(player, computer));
   displayScore();
   if (isGameOver()) {
@@ -52,6 +53,15 @@ function playRound(event, computerSelection = computerPlay()) {
     endGame();
     askToPlayAgain();
   }
+}
+
+function displayRoundResult(playersPick, computersPick) {
+  const playerPick = document.querySelector("div.player-pick");
+  const computerPick = document.querySelector("div.computer-pick");
+  const roundWinner = document.querySelector("div.round-winner");
+  playerPick.textContent = `You picked: ${playersPick}`;
+  computerPick.textContent = `Computer picked: ${computersPick}`;
+  roundWinner.textContent = `Round: ${result(playersPick, computersPick)}`;
 }
 
 function endGame() {
@@ -141,7 +151,7 @@ function initButtons() {
   body.appendChild(btnContainer);
 }
 
-function initScoreDisplay() {
+function initTotalScoreDisplay() {
   const body = document.querySelector("body");
   const scoreBoard = document.createElement("div");
   scoreBoard.classList.add("scoreboard");
@@ -157,6 +167,22 @@ function initScoreDisplay() {
   body.appendChild(scoreBoard);
 }
 
+function initRoundDisplay() {
+  const roundResultContainer = document.createElement("div");
+  const body = document.querySelector("body");
+  roundResultContainer.classList.add("round-results");
+  const playerPick = document.createElement("div");
+  const computerPick = document.createElement("div");
+  const roundWinner = document.createElement("div");
+  playerPick.classList.add("player-pick");
+  computerPick.classList.add("computer-pick");
+  roundWinner.classList.add("round-winner");
+  roundResultContainer.appendChild(playerPick);
+  roundResultContainer.appendChild(computerPick);
+  roundResultContainer.appendChild(roundWinner);
+  body.appendChild(roundResultContainer);
+}
+
 function paintTitle() {
   const title = document.createElement("h1");
   const body = document.querySelector("body");
@@ -166,7 +192,8 @@ function paintTitle() {
 function game() {
   paintTitle();
   initButtons();
-  initScoreDisplay();
+  initRoundDisplay();
+  initTotalScoreDisplay();
 }
 
 game();
