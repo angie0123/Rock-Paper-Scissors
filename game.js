@@ -16,14 +16,6 @@ function computerPlay() {
   }
 }
 
-function playRound(event, computerSelection = computerPlay()) {
-  const player = this.textContent.toLowerCase();
-  const computer = computerSelection;
-  updateScore(result(player, computer));
-}
-
-function updateScore(result) {}
-
 function result(user, opponent) {
   switch (user) {
     case "rock":
@@ -49,6 +41,19 @@ function result(user, opponent) {
       return "tie";
   }
 }
+
+function playRound(event, computerSelection = computerPlay()) {
+  const player = this.textContent.toLowerCase();
+  const computer = computerSelection;
+  const updatedScore = updateScore(result(player, computer));
+  displayResult();
+}
+
+function updateScore(result) {
+  score[result] += 1;
+}
+
+function displayResult() {}
 
 function reportScore(wins, losses, totalGames) {
   wins > losses ? console.log("You win!") : console.log("You lose.");
