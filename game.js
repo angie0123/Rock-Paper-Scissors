@@ -1,4 +1,4 @@
-let score = { win: 0, lose: 0, tie: 0 };
+const score = { win: 0, lose: 0, tie: 0 };
 
 function computerPlay() {
   const getRandomInt = (max) => Math.floor(Math.random() * max);
@@ -46,23 +46,27 @@ function playRound(event, computerSelection = computerPlay()) {
   const player = this.textContent.toLowerCase();
   const computer = computerSelection;
   const updatedScore = updateScore(result(player, computer));
-  displayResult();
+  displayScore();
 }
 
 function updateScore(result) {
   score[result] += 1;
+  console.log(score);
 }
 
-function displayResult() {}
+function displayScore() {
+  const scoreWins = document.querySelector("div.score-wins");
+  const scoreLosses = document.querySelector("div.score-losses");
+  const scoreTies = document.querySelector("div.score-ties");
 
-function reportScore(wins, losses, totalGames) {
-  wins > losses ? console.log("You win!") : console.log("You lose.");
-  console.log("Wins: " + wins);
-  console.log("Losses: " + losses);
-  console.log("Ties: " + (totalGames - wins - losses));
+  scoreWins.textContent = score.win === 0 ? "" : `You win: ${score.win}`;
+  scoreLosses.textContent =
+    score.lose === 0 ? "" : `Computer win: ${score.lose}`;
+  scoreTies.textContent = score.tie === 0 ? "" : `Tie: ${score.tie}`;
 }
 
 function game() {
+  //set up game interface buttons
   const body = document.querySelector("body");
   const rockBtn = document.createElement("div");
   rockBtn.textContent = "Rock";
@@ -80,7 +84,19 @@ function game() {
     body.appendChild(button);
   });
 
-  console.log(score);
+  //set up scoreDisplay
+  const scoreBoard = document.createElement("div");
+  scoreBoard.classList.add("scoreboard");
+  const scoreWins = document.createElement("div");
+  scoreWins.classList.add("score-wins");
+  const scoreLosses = document.createElement("div");
+  scoreLosses.classList.add("score-losses");
+  const scoreTies = document.createElement("div");
+  scoreTies.classList.add("score-ties");
+  scoreBoard.appendChild(scoreWins);
+  scoreBoard.appendChild(scoreLosses);
+  scoreBoard.appendChild(scoreTies);
+  body.appendChild(scoreBoard);
 
   //   let wins = 0;
   //   let losses = 0;
